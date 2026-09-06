@@ -28,16 +28,16 @@ if (!prefersReduced && window.gsap) {
   gsap.from('.hero-actions', { y: 22, opacity: 0, duration: 0.8, delay: 0.65, ease: 'power3.out' });
   gsap.from('.hero-lion', { scale: 0.82, opacity: 0, rotation: -16, duration: 1.6, delay: 0.2, ease: 'power3.out' });
 
-  document.querySelectorAll('.reveal').forEach((element) => {
-    gsap.to(element, {
+  document.querySelectorAll('.reveal:not(.company-card)').forEach((element) => {
+    gsap.fromTo(element, { y: 25, opacity: 0 }, {
       scrollTrigger: { trigger: element, start: 'top 86%', once: true },
       y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
     });
   });
 
-  gsap.from('.company-card', {
+  gsap.fromTo('.company-card', { y: 35, opacity: 0 }, {
     scrollTrigger: { trigger: '.cards', start: 'top 80%', once: true },
-    y: 35, opacity: 0, duration: 0.8, stagger: 0.14, ease: 'power3.out',
+    y: 0, opacity: 1, duration: 0.8, stagger: 0.14, ease: 'power3.out',
   });
 
   document.querySelectorAll('[data-count]').forEach((counter) => {
