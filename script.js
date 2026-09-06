@@ -57,6 +57,17 @@ if (!prefersReduced && window.gsap) {
   document.querySelectorAll('[data-count]').forEach((counter) => { counter.textContent = counter.dataset.count; });
 }
 
+const observedSections = [...document.querySelectorAll('main > section[id]')];
+const navLinks = [...document.querySelectorAll('.main-nav > a:not(.nav-cta)')];
+const updateActiveLink = (id) => navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${id}`));
+if ('IntersectionObserver' in window) {
+  const sectionObserver = new IntersectionObserver((entries) => {
+    const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (visible) updateActiveLink(visible.target.id);
+  }, { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.25, 0.5, 0.75] });
+  observedSections.forEach((section) => sectionObserver.observe(section));
+}
+
 const glow = document.querySelector('.cursor-glow');
 window.addEventListener('pointermove', (event) => {
   if (!glow || window.innerWidth < 900) return;
