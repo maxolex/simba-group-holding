@@ -2,4 +2,6 @@ node_modules
 dist
 .playwright-mcp
 *.png
+*.docx
+photo_*.jpg
 .env*
